@@ -45,10 +45,11 @@ public class CustomerFactory : MonoBehaviour
     void Start()
     {
         currentCustomer = customers[0];
-        StartCoroutine(Spawn(currentCustomer.arrivalTime - 5));
+        //StartCoroutine(Spawn(currentCustomer.arrivalTime - 5));
+        StartCoroutine(SpawnCustomers());//GD code
     }
     
-    IEnumerator Spawn(float time)
+    /*IEnumerator Spawn(float time)
     {
         yield return new WaitForSeconds(time);
         GameObject currentCustomerObject = Instantiate(CustomerObject, targets[0].position, transform.rotation);
@@ -57,5 +58,22 @@ public class CustomerFactory : MonoBehaviour
         float arrivalDelay = currentCustomer.arrivalTime;
         currentCustomer = customers[currentCustomer.Id];
         StartCoroutine(Spawn(currentCustomer.arrivalTime - arrivalDelay));
+    }*/
+
+    IEnumerator SpawnCustomers() // GD code
+    {
+        int queueIndex = 0;
+        foreach (Customer c in customers)
+        {
+            yield return new WaitForSeconds(c.arrivalTime - 5);
+
+            GameObject customerObj = Instantiate(CustomerObject, targets[0].position, transform.rotation);
+            CustomerMovement movement = customerObj.GetComponent<CustomerMovement>();
+
+            movement.queuePositions = targets; // Assign positions
+            movement.SetQueuePosition(queueIndex); // Each customer gets a new queue spot
+
+            queueIndex++; // Move to the next spot
+        }
     }
 }
