@@ -5,12 +5,11 @@ using TMPro;
 public class TimerUI : MonoBehaviour
 {
     public TextMeshProUGUI timerText;
+    public TextMeshProUGUI orderUserText;
     private float timer = 0f;
 
     void Update()
     {
-        timer += Time.deltaTime;
-
         if (timer >= 60f)
         {
             int minutes = Mathf.FloorToInt(timer / 60f);
@@ -23,5 +22,13 @@ public class TimerUI : MonoBehaviour
         {
             timerText.text = "Timer: " + timer.ToString("F2");
         }
+    }
+    public void SetTimerText(float time)
+    {
+        timer = time;
+    }
+    public void SetOrderText(string order)
+    {
+        orderUserText.text = order;
     }
 }

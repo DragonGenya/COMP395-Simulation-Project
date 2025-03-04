@@ -1,24 +1,18 @@
+using System;
+using UnityEditor.EditorTools;
 using UnityEngine;
 
 public class CustomerMovement : MonoBehaviour
 {
-    public Transform targetPoint; // Assign in inspector
-    public float moveDuration;
-    public Transform[] queuePositions; // Assign queue spots in Inspector GD
-    private int queueIndex = -1; // Each customer gets a unique spot GD
-    public float timer; // Internal timer
+    [Tooltip("How much time the customer will take to get to a node from a starting point. ")]
+    [SerializeField]
+    private float moveDuration;
+    private Transform targetPoint;
+    private float timer; // Internal timer
     private bool isMoving = false;
     private Vector3 startPos;
 
-    public void SetQueuePosition(int index)// GD code
-    {
-        if (index < queuePositions.Length)
-        {
-            queueIndex = index;
-            targetPoint = queuePositions[queueIndex];
-            StartMovement();
-        }
-    }
+    private Action onEndMovementAction;
     void StartMovement()
     {
         startPos = transform.position;
@@ -37,13 +31,15 @@ public class CustomerMovement : MonoBehaviour
             if (t >= 1f)
             {
                 isMoving = false; // Stop movement when finished
+                onEndMovementAction?.Invoke();
             }
         }
     }
 
-    public void SetNewDestination(Transform newTarget)
+    public void SetNewDestination(Transform newTarget, Action onArrival = null)
     {
         targetPoint = newTarget;
+        onEndMovementAction = onArrival;
         StartMovement();
     }
 }
