@@ -63,14 +63,16 @@ public class Customer : MonoBehaviour
     }
     private void ArrivedToNode()
     {
-        currentNode.OccupyNode();
+
         if (currentNode.GetType() == typeof(ServiceNode))
         {
             ServiceNode serviceNode = (ServiceNode)currentNode;
             serviceNode.CurrentOrder = beverageOrder;
+            currentNode.OccupyNode();
         }
         else
         {
+            currentNode.OccupyNode();
             CheckNextNode();
         }
     }

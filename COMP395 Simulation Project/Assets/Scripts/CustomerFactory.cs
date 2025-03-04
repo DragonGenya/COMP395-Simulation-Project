@@ -4,30 +4,47 @@ using UnityEngine;
 
 public class CustomerFactory : MonoBehaviour
 {
-    [SerializeField]
-    private List<Customer> customerPool = new();
+    private readonly List<Customer> customerPool = new();
     [SerializeField]
     private Transform spawnLocation;
+    [SerializeField]
+    private List<GameObject> customerPrefabs = new();
+    [SerializeField]
+    private int customerPoolSize = 40;
 
     void Start()
     {
-        foreach (Customer c in customerPool)
-        {
-            c.IsOnQueue = false;
-        }
+        PopulateList();
         if (spawnLocation == null)
         {
             spawnLocation = transform;
         }
     }
+    private void PopulateList()
+    {
+        for (int i = 0; i < customerPoolSize; i++)
+        {
+            GameObject newCustomer = Instantiate(customerPrefabs[Random.Range(0, customerPrefabs.Count)], transform);
+            if (newCustomer.TryGetComponent(out Customer customer))
+            {
+                customer.IsOnQueue = false;
+                customerPool.Add(customer);
+            }
+        }
+    }
+
     public void SpawnCustomer(Node initialNode)
     {
         Customer newCustomer = CheckAvailableCustomer();
-        if (newCustomer != null)
+        if (newCustomer != null && !initialNode.IsOccupied)
         {
             newCustomer.SetLocation(spawnLocation.position);
             newCustomer.CurrentNode = initialNode;
             newCustomer.IsOnQueue = true;
+        }
+        else
+        {
+            Debug.LogWarning("The Initial Node is Occupied!. There's no room in Queue.");
         }
     }
 

@@ -12,6 +12,7 @@ public class ServiceNode : Node
     private float _currentTimer = 0.0f;
 
     public BeverageTypes CurrentOrder;
+    public bool IsServing = false;
 
     public float ServiceTime
     {
@@ -37,9 +38,11 @@ public class ServiceNode : Node
     {
         if (isOccupied && _serviceTime >= 0.0f)
         {
+            IsServing = true;
             _currentTimer += Time.deltaTime;
             if (_currentTimer >= _serviceTime)
             {
+                IsServing = false;
                 OnServiceEnd?.Invoke();
             }
         }
