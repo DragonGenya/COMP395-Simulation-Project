@@ -19,13 +19,13 @@ namespace PW
         public GameObject productPrefab;
 
         [SerializeField]
-        public int orderID=0;
+        public int orderID = 0;
 
         [SerializeField]
         public string productName;
 
         [SerializeField]
-        public float productPrice=10;
+        public float productPrice = 10;
 
         [SerializeField]
         public ProductType productType;
@@ -46,7 +46,7 @@ namespace PW
         public bool RegenerateProduct;
 
 
-        public Product(int ID,string name,ProductType _type, float price)
+        public Product(int ID, string name, ProductType _type, float price)
         {
             orderID = ID;
 
@@ -64,5 +64,5 @@ namespace PW
 
         }
 
-    }                                                                                                                                                                           
+    }
 }
