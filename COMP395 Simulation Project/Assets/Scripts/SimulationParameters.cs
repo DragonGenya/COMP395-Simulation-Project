@@ -1,5 +1,4 @@
 using System;
-using UnityEditor.SearchService;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "SimulationParameters", menuName = "ScriptableObjects/SimulationParameters")]
