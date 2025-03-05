@@ -11,6 +11,8 @@ public class Customer : MonoBehaviour
         set { currentNode = value; }
     }
     private CustomerMovement customerMovement;
+    [SerializeField]
+    private LookAt lookAt;
     public bool IsOnQueue
     {
         get { return gameObject.activeInHierarchy; }
@@ -102,5 +104,12 @@ public class Customer : MonoBehaviour
             currentNode = null;
         }
         gameObject.SetActive(false);
+    }
+    public void SetUpTarget(Transform target)
+    {
+        if (lookAt != null)
+        {
+            lookAt.Target = target;
+        }
     }
 }

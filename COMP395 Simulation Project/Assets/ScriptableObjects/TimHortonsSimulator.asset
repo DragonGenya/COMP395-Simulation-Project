@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf9c579dcf7d44d489b327cdec53297c, type: 3}
+  m_Name: TimHortonsSimulator
+  m_EditorClassIdentifier: 
+  simulationName: Mr. Horton's Cooky Simulator
+  timeUnit: 3600
+  MeanServiceTime: 0.0173
+  MeanInterarrivalTime: 0.0217
+  SimulationStart: 0
+  SimulationEnd: 0.5

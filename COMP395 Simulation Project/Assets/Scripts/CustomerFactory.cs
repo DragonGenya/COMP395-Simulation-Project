@@ -11,6 +11,8 @@ public class CustomerFactory : MonoBehaviour
     private List<GameObject> customerPrefabs = new();
     [SerializeField]
     private int customerPoolSize = 40;
+    [SerializeField]
+    private Transform lookAtTarget;
 
     void Start()
     {
@@ -28,6 +30,7 @@ public class CustomerFactory : MonoBehaviour
             if (newCustomer.TryGetComponent(out Customer customer))
             {
                 customer.IsOnQueue = false;
+                customer.SetUpTarget(lookAtTarget);
                 customerPool.Add(customer);
             }
         }

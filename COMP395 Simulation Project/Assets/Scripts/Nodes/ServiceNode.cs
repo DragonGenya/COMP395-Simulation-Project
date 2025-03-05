@@ -7,7 +7,7 @@ public class ServiceNode : Node
     //Event here!
     public static event Action OnServiceStart;
     public static event Action OnServiceEnd;
-
+    //I did-a the events yippee
     private float _serviceTime = -1.0f;
     private float _currentTimer = 0.0f;
 
